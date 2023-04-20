@@ -1,4 +1,6 @@
-<?php include_once('funzioni.php'); ?>
+<?php require_once('funzioni.php'); 
+require_once('cliente_azioni.php');
+?>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -51,52 +53,10 @@
         <label for="email"><b>Email:</b></label><br>
         <input type="email" id="email" name="email"/><br><br>
 
-        
-        <?php
-        if(!isset($_GET['registra'])){
-      
-            echo '<input type="submit" name="registra" value="registra"/>';
-            echo '</form>';
-        }else{
-            $nome = $_GET['nome'];
-            $cognome = $_GET['cognome'];
-            $data_nascita = $_GET['data_nascita'];
-            $sesso = $_GET['sesso'];
-            $luogo_nascita = $_GET['luogo_nascita'];
-            $cod_fiscale = $_GET['cod_fiscale'];
-            $residenza = $_GET['residenza'];
-            $citta = $_GET['citta'];
-            $documento = $_GET['documento'];
-            $nr_documento = $_GET['nr_documento'];
-            $emissione = $_GET['emissione'];
-            $telefono = $_GET['telefono'];
-            $email = $_GET['email'];
-            
-            $sql_nuovo_cliente = "INSERT INTO clienti (nome,cognome,data_nascita,sesso,luogo_nascita,cod_fiscale,
-                                  residenza,citta,documento,nr_documento,emissione,telefono,email)
-            VALUES('$nome',
-                   '$cognome',
-                   '$data_nascita',
-                   '$sesso',
-                   '$luogo_nascita',
-                   '$cod_fiscale',
-                   '$residenza',
-                   '$citta',
-                   '$documento',
-                   '$nr_documento',
-                   '$emissione ',
-                   '$telefono',
-                   '$email')";
-            $connessione->query($sql_nuovo_cliente);
+        <input type="submit" name="registra" value="registra"/>
 
-            echo "<b>CLIENTE REGISTRATO CON SUCCESSO!</b>";
-            echo "</form>";
-            echo '<a href="clienti.php">';
-                echo '<input type="submit" name="gestione_clienti" value="Torna a gestione clienti"/>';
-            echo '</a>';
-        }
-        ?>
     </form>
+
     <a href="clienti.php">
       <input type="submit" name="annulla" value="annulla"/>
     </a>
