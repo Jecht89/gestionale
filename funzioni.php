@@ -1,17 +1,19 @@
 <?php 
 
+$db_config = file_get_contents('config.json');
+$db_config = json_decode($db_config, true);
 // CONNESSIONE DB
-$host = "localhost";
-$user = "root";
-$password = "";
-$database = "gestionale";
-
+$host = $db_config["host"];
+$user = $db_config["user"];
+$password = $db_config["password"];
+$database = $db_config["database"];
 try {
     $connessione = new PDO ("mysql:host=$host;dbname=$database", $user, $password);
     $connessione->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Connessione effettuata";
 } catch (PDOException $e) {
-    echo "Errore: " . $e->getMessage();
+    $errore = "Errore: " . $e->getMessage();
+    header("location: errore_connessione.php?errore=" ."$errore");
     die();
 }
 
